@@ -19,6 +19,7 @@ func baseLayout(title pageTitle: String, @NodeBuilder children: () -> NodeConver
         meta(charset: "utf-8")
         link(href: "/style.css", rel: "stylesheet")
         title { pageTitle }
+        script(async: true, defer: true, src: "https://plausible.io/js/plausible.js", customAttributes: ["data-domain": "spamusement.cc"])
       }
       
       body {
