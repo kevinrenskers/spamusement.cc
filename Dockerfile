@@ -23,7 +23,7 @@ COPY . .
 
 # Build the site with verbose output for debugging
 RUN echo "Starting website build..." \
-    && .build/release/Spamusement \
+    && .build/release/Spamusement
 
 # Stage 2: Nginx runtime
 FROM nginx:alpine
