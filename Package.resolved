@@ -5,8 +5,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/loopwerk/Parsley",
       "state" : {
-        "revision" : "ad35091c7a790f04fc5a912c8bde8963eba753d2",
-        "version" : "0.9.1"
+        "revision" : "3de7eebc252450414fa91d96ec2dedf4785994e9",
+        "version" : "1.0.1"
       }
     },
     {
@@ -23,8 +23,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/loopwerk/Saga",
       "state" : {
-        "revision" : "c28b5c2da918bf5e873a5bb87d9e739e09ac7b97",
-        "version" : "2.7.0"
+        "revision" : "7fcd78b8b045b06950bb8c5c06fd7b82cdbd4e6e",
+        "version" : "2.9.0"
       }
     },
     {
@@ -32,8 +32,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/loopwerk/SagaParsleyMarkdownReader",
       "state" : {
-        "revision" : "b5f26f35d8843b01bd9a884a6a9d9922c58b1cba",
-        "version" : "1.0.1"
+        "revision" : "5a9fa57a5b123afa4acdb0800e348aef549bceba",
+        "version" : "1.1.0"
       }
     },
     {
@@ -52,6 +52,15 @@
       "state" : {
         "revision" : "26cc5e9ae0947092c7139ef7ba612e34646086c7",
         "version" : "0.10.1"
+      }
+    },
+    {
+      "identity" : "swift-argument-parser",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/apple/swift-argument-parser",
+      "state" : {
+        "revision" : "c5d11a805e765f52ba34ec7284bd4fcd6ba68615",
+        "version" : "1.7.0"
       }
     },
     {

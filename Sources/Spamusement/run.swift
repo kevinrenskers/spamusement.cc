@@ -19,9 +19,15 @@ func baseLayout(title pageTitle: String, @NodeBuilder children: () -> NodeConver
         meta(charset: "utf-8")
         link(href: "/style.css", rel: "stylesheet")
         title { pageTitle }
-        script(async: true, defer: true, src: "https://plausible.io/js/plausible.js", customAttributes: ["data-domain": "spamusement.cc"])
+        script(async: true, src: "https://stats.loopwerk.io/js/pa-rDR1pWZBRKDTvFE5ffKvX.js")
+        script {
+          Node.raw("""
+          window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
+          plausible.init()
+          """)
+        }
       }
-      
+
       body {
         div(class: "container") {
           children()
