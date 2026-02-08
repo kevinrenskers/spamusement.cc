@@ -19,11 +19,11 @@ func baseLayout(title pageTitle: String, @NodeBuilder children: () -> NodeConver
         meta(charset: "utf-8")
         link(href: "/style.css", rel: "stylesheet")
         title { pageTitle }
-        script(async: true, src: "https://stats.loopwerk.io/js/pa-rDR1pWZBRKDTvFE5ffKvX.js")
+        script(async: true, src: "/js/pa-rDR1pWZBRKDTvFE5ffKvX.js")
         script {
           Node.raw("""
           window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
-          plausible.init()
+          plausible.init({ endpoint: "/api/event" });
           """)
         }
       }
