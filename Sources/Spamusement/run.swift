@@ -57,7 +57,7 @@ func renderIndex(context: ItemsRenderingContext<ComicMetadata>) -> Node {
       }
     }
     
-    context.items.sorted(by: { $0.metadata.id > $1.metadata.id } ).map { item in
+    context.items.map { item in
       p {
         a(href: item.url) { item.metadata.title }
         br()
@@ -72,12 +72,6 @@ func renderComic(context: ItemRenderingContext<ComicMetadata>) -> Node {
   dateFormatter.dateFormat = "MMMM dd, yyyy"
   dateFormatter.timeZone = .current
   
-  let items = context.items.sorted(by: { $0.metadata.id < $1.metadata.id } )
-  
-  let index = items.firstIndex(where: { $0.metadata.id == context.item.metadata.id })!
-  let previous = index > 0 ? items[index-1] : nil
-  let next = index < items.count - 1 ? items[index+1] : nil
-  
   return baseLayout(title: context.item.metadata.title) {
     div(class: "comic") {
       h1(class: "center") { context.item.metadata.title }
@@ -86,13 +80,13 @@ func renderComic(context: ItemRenderingContext<ComicMetadata>) -> Node {
     
     div(class: "pagination") {
       div {
-        if let previous {
+        if let previous = context.previous {
           a(href: previous.url) { "← " + previous.metadata.title }
         }
       }
       
       div(class: "right") {
-        if let next {
+        if let next = context.next {
           a(href: next.url) { next.metadata.title + " →" }
         }
       }
@@ -112,6 +106,7 @@ struct Run {
         metadata: ComicMetadata.self,
         readers: [.parsleyMarkdownReader],
         itemWriteMode: .keepAsFile,
+        sorting: { $0.metadata.id > $1.metadata.id },
         writers: [
           .listWriter(swim(renderIndex)),
           .itemWriter(swim(renderComic)),
