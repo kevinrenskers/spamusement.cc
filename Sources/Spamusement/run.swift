@@ -19,13 +19,7 @@ func baseLayout(title pageTitle: String, @NodeBuilder children: () -> NodeConver
         meta(charset: "utf-8")
         link(href: "/style.css", rel: "stylesheet")
         title { pageTitle }
-        script(async: true, src: "/js/pa-rDR1pWZBRKDTvFE5ffKvX.js")
-        script {
-          Node.raw("""
-          window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
-          plausible.init({ endpoint: "/api/event" });
-          """)
-        }
+        script(defer: true, src: "/script.js", customAttributes: ["data-website-id": "4268260a-c4c9-4dde-99a4-3e73abd21aae"])
       }
 
       body {
