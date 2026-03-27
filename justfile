@@ -1,2 +1,2 @@
 run:
-	swift run watch content Sources deploy
+	saga dev

@@ -1,5 +1,5 @@
 import Foundation
-import PathKit
+import SagaPathKit
 import Saga
 import SagaParsleyMarkdownReader
 import SagaSwimRenderer
@@ -92,21 +92,15 @@ func renderComic(context: ItemRenderingContext<ComicMetadata>) -> Node {
   }
 }
 
-@main
-struct Run {
-  static func main() async throws {
-    try await Saga(input: "content", output: "deploy")
-      .register(
-        metadata: ComicMetadata.self,
-        readers: [.parsleyMarkdownReader],
-        itemWriteMode: .keepAsFile,
-        sorting: { $0.metadata.id > $1.metadata.id },
-        writers: [
-          .listWriter(swim(renderIndex)),
-          .itemWriter(swim(renderComic)),
-        ]
-      )
-      .run()
-      .staticFiles()
-  }
-}
+try await Saga(input: "content", output: "deploy")
+  .register(
+    metadata: ComicMetadata.self,
+    readers: [.parsleyMarkdownReader],
+    itemWriteMode: .keepAsFile,
+    sorting: { $0.metadata.id > $1.metadata.id },
+    writers: [
+      .listWriter(swim(renderIndex)),
+      .itemWriter(swim(renderComic)),
+    ]
+  )
+  .run()

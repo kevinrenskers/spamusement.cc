@@ -1,14 +1,14 @@
-// swift-tools-version:5.9
+// swift-tools-version:6.0
 
 import PackageDescription
 
 let package = Package(
   name: "Spamusement",
   platforms: [
-    .macOS(.v12),
+    .macOS(.v14),
   ],
   dependencies: [
-    .package(url: "https://github.com/loopwerk/Saga", from: "2.3.0"),
+    .package(url: "https://github.com/loopwerk/Saga", from: "3.0.0"),
     .package(url: "https://github.com/loopwerk/SagaParsleyMarkdownReader", from: "1.0.0"),
     .package(url: "https://github.com/loopwerk/SagaSwimRenderer", from: "1.0.0"),
   ],
