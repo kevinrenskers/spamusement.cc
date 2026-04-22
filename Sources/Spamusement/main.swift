@@ -19,7 +19,7 @@ func baseLayout(title pageTitle: String, @NodeBuilder children: () -> NodeConver
         meta(charset: "utf-8")
         link(href: "/style.css", rel: "stylesheet")
         title { pageTitle }
-        script(defer: true, src: "/script.js", customAttributes: ["data-website-id": "4268260a-c4c9-4dde-99a4-3e73abd21aae"])
+        script(defer: true, src: "/script.js", customAttributes: ["data-website-id": "4268260a-c4c9-4dde-99a4-3e73abd21aae", "data-performance": "true"])
       }
 
       body {
