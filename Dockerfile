@@ -19,8 +19,8 @@ RUN --mount=type=cache,target=/app/.build,sharing=locked \
 # is run from /usr/local/bin below.
 COPY Sources ./Sources
 RUN --mount=type=cache,target=/app/.build,sharing=locked \
-    swift build --product Spamusement -c release \
-    && cp .build/release/Spamusement /usr/local/bin/spamusement
+    swift build --product Spamusement \
+    && cp .build/debug/Spamusement /usr/local/bin/spamusement
 
 # Copy all remaining files
 COPY . .
