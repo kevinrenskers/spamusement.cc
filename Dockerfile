@@ -2,28 +2,31 @@
 
 # Stage 1: Build environment
 # Using Ubuntu 24.04 (Noble)
-FROM swift:6.0-noble AS builder
+FROM swift:6.1-noble AS builder
 
 # Set working directory
 WORKDIR /app
 
-# Copy Swift package files AND source code needed to build
-COPY Package.swift ./
-COPY Package.resolved ./
+# Pre-fetch Swift dependencies (cached unless the Package files change)
+COPY Package.swift Package.resolved ./
+RUN --mount=type=cache,target=/app/.build,sharing=locked \
+    swift package resolve
+
+# Pre-build the site generator (cached unless the sources change).
+# .build is a cache mount so SwiftPM's incremental state survives between
+# deploys: only the changed module recompiles. Because a cache mount isn't
+# part of the image layer, the binary has to be copied out of it here, and
+# is run from /usr/local/bin below.
 COPY Sources ./Sources
+RUN --mount=type=cache,target=/app/.build,sharing=locked \
+    swift build --product Spamusement -c release \
+    && cp .build/release/Spamusement /usr/local/bin/spamusement
 
-# Pre-fetch and pre-build Swift dependencies
-# This layer will be cached as long as Package files and Sources don't change
-RUN echo "Prefetching and prebuilding dependencies..." \
-    && swift package resolve \
-    && swift build --product Spamusement -c release
-
-# Copy all source files
+# Copy all remaining files
 COPY . .
 
-# Build the site with verbose output for debugging
-RUN echo "Starting website build..." \
-    && .build/release/Spamusement
+# Build the site
+RUN spamusement
 
 # Stage 2: Nginx runtime
 FROM nginx:alpine
@@ -33,9 +36,3 @@ COPY nginx.conf /etc/nginx/conf.d/default.conf
 
 # Copy built static files from builder
 COPY --from=builder /app/deploy /usr/share/nginx/html
-
-# Expose port 80
-EXPOSE 80
-
-# Start nginx
-CMD ["nginx", "-g", "daemon off;"]
